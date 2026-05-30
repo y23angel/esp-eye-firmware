@@ -94,6 +94,8 @@ void blink_task(void *pvParameters){
 
 extern "C" int app_main()
 {
+
+    int zzz
     setup_led();
 
     // GPIO 21, 22는 LED와 I2C(가속도계)가 공유하므로,
