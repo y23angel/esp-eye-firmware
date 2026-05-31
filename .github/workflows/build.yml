@@ -22,3 +22,12 @@ jobs:
         run: |
           . $IDF_PATH/export.sh
           idf.py build
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp-eye-firmware
+          path: |
+            build/esp-eye.bin
+            build/bootloader/bootloader.bin
+            build/partition_table/partition-table.bin
