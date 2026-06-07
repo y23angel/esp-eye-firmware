@@ -98,14 +98,14 @@ extern "C" int app_main()
 
     // GPIO 21, 22는 LED와 I2C(가속도계)가 공유하므로,
     // blink 테스트 시에는 ei_inertial_init() 비활성화 필요
-    BaseType_t res = xTaskCreate(blink_task, "blink_task", 4096, nullptr, 5, nullptr);
+   // BaseType_t res = xTaskCreate(blink_task, "blink_task", 4096, nullptr, 5, nullptr);
 
-    if(res == pdPASS){
-        ei_printf("Task created successfully\r\n");
-    }
-    else{
-        ei_printf("Task create failed\r\n");
-    }
+    // if(res == pdPASS){
+    //     ei_printf("Task created successfully\r\n");
+    // }
+    // else{
+    //     ei_printf("Task create failed\r\n");
+    // }
 
     /* Initialize Edge Impulse sensors and commands */
 

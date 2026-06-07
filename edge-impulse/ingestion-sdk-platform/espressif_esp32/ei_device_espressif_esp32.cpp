@@ -367,7 +367,7 @@ bool ei_user_invoke_stop(void)
  */
 char ei_get_serial_byte(void)
 {
-	char ch = getchar();
+	char ch = getchar();-
     // for some reason ESP32 only gets 10 (\n) and AT server has 13 (\r) as terminator character...
     if (ch == '\n') {
         ch = '\r';
