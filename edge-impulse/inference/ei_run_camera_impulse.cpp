@@ -49,6 +49,8 @@
 
 #include "esp_timer.h"
 
+extern void firebase_send_detection(bool detected, float confidence, const char *label);
+
 #define DWORD_ALIGN_PTR(a)   ((a & 0x3) ?(((uintptr_t)a + 0x4) & ~(uintptr_t)0x3) : a)
 
 typedef enum {
@@ -190,6 +192,24 @@ void ei_run_impulse(void)
     ei_free(snapshot_buf);
 
     ei_print_results(&ei_default_impulse, &result);
+
+#if EI_CLASSIFIER_OBJECT_DETECTION == 1
+    {
+        bool parcel_found = false;
+        float best_conf = 0.0f;
+        const char *best_label = "none";
+        for (uint32_t i = 0; i < result.bounding_boxes_count; i++) {
+            if (result.bounding_boxes[i].value > 0) {
+                parcel_found = true;
+                if (result.bounding_boxes[i].value > best_conf) {
+                    best_conf = result.bounding_boxes[i].value;
+                    best_label = result.bounding_boxes[i].label;
+                }
+            }
+        }
+        firebase_send_detection(parcel_found, best_conf, best_label);
+    }
+#endif
 
     if (debug_mode) {
         ei_printf("\r\n----------------------------------\r\n");

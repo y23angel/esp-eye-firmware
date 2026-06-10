@@ -41,3 +41,7 @@
 /copy-sdk.sh
 create-arduino-library.sh
 
+# credentials - never commit
+main/wifi_credentials.h
+main/firebase_config.h
+

@@ -85,4 +85,5 @@ list(APPEND SOURCE_FILES ${S_FILES_ESP_DSP})
 idf_component_register(SRCS "main.cpp" "${SOURCE_FILES}"
                        INCLUDE_DIRS "${include_dirs}")
 
+target_link_libraries(${COMPONENT_LIB} PRIVATE idf::esp_http_client idf::esp-tls)
 target_compile_options(${COMPONENT_LIB} PRIVATE -std=gnu++17)
