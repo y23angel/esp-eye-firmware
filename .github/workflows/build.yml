@@ -14,9 +14,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      - name: Create credential placeholders for CI
+        run: |
+          printf '#ifndef WIFI_CREDENTIALS_H\n#define WIFI_CREDENTIALS_H\n#define WIFI_SSID "ci"\n#define WIFI_PASSWORD "ci"\n#endif\n' > main/wifi_credentials.h
+          printf '#ifndef FIREBASE_CONFIG_H\n#define FIREBASE_CONFIG_H\n#define FIREBASE_DATABASE_URL "https://placeholder.firebaseio.com"\n#endif\n' > main/firebase_config.h
 
       - name: Build firmware
         run: |
